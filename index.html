@@ -3,398 +3,990 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buldogs do Jurunas - Site Oficial</title>
+    <title>Buldogs do Jurunas - App Oficial</title>
 
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Barlow:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* =============================================
-           VARIÁVEIS E RESET
-        ============================================= */
         :root {
-            --azul:    #001f4d;
-            --azul2:   #00307a;
-            --branco:  #f5f5f0;
-            --cinza:   #0d0d0d;
-            --acento:  #c8a84b; 
-            --texto:   #e0ddd5;
+            --azul-deep: #000a1a;
+            --acento: #f0ad4e;
+            --branco: #f5f5f0;
+            --cinza-escuro: #0d0d0d;
+            --texto: #e0ddd5;
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { background-color: #0a0a0a; color: var(--texto); font-family: 'Barlow', sans-serif; font-weight: 400; overflow-x: hidden; }
-        ::selection { background: var(--acento); color: #000; }
+        body {
+            background-color: #050505;
+            color: var(--texto);
+            font-family: 'Barlow', sans-serif;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
 
-        .secao-opcional { display: none; }
+        /* NAVBAR & SIDEBAR */
+        .navbar-oficial {
+            background: rgba(0, 5, 15, 0.98);
+            border-bottom: 2px solid var(--acento);
+            padding: 12px 0;
+            z-index: 1040;
+            position: sticky;
+            top: 0;
+        }
+        .sidebar-buldogs {
+            background: var(--cinza-escuro);
+            border-right: 2px solid var(--acento);
+            width: 280px !important;
+        }
+        .nav-link-app {
+            font-family: 'Oswald', sans-serif;
+            color: rgba(255,255,255,0.8);
+            padding: 12px 20px;
+            border-bottom: 1px solid #1a1a1a;
+            display: block;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .nav-link-app:hover {
+            background: rgba(240, 173, 78, 0.1);
+            color: var(--acento);
+            padding-left: 30px;
+        }
+        .nav-link-app i { margin-right: 12px; color: var(--acento); }
 
-        /* =============================================
-           TOPBAR E NAVBAR
-        ============================================= */
-        .topbar { background: var(--cinza); border-bottom: 1px solid rgba(200,168,75,0.2); font-size: 0.8rem; padding: 7px 0; letter-spacing: 1px; color: #888; }
-        .topbar a { color: #888; text-decoration: none; transition: color 0.2s; }
-        .topbar a:hover { color: var(--acento); }
+        /* HERO & SECTIONS */
+        .hero-premium {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #001f4d 0%, #050505 80%);
+            transition: background 0.5s ease;
+            padding: 20px 0 60px 0;
+        }
+        .secao {
+            padding: 80px 0;
+            display: none;
+        }
+        .secao-inicial { display: block; }
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--branco);
+            border-bottom: 3px solid var(--acento);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            transition: text-shadow 0.3s;
+        }
+        .section-title span { color: var(--acento); }
 
-        .navbar-oficial { background: rgba(0, 15, 40, 0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,168,75,0.25); padding: 14px 0; transition: padding 0.3s; z-index: 1040;}
-        .navbar-oficial.scrolled { padding: 8px 0; }
-        
-        .brand-escudo { width: 36px; height: 36px; border-radius: 4px; }
-        .navbar-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 3px; color: var(--branco) !important; display: flex; align-items: center; gap: 10px; margin: 0; }
-        
-        .nav-link-pub { font-family: 'Oswald', sans-serif; font-size: 0.85rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: #bbb !important; padding: 4px 16px !important; transition: color 0.2s; position: relative; cursor: pointer; }
-        .nav-link-pub::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 1px; background: var(--acento); transform: scaleX(0); transition: transform 0.3s; }
-        .nav-link-pub:hover { color: var(--branco) !important; }
-        .nav-link-pub:hover::after { transform: scaleX(1); }
+        /* CARDS & INPUTS */
+        .card-app {
+            background: #111;
+            border: 1px solid #222;
+            border-left: 5px solid var(--acento);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card-app:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        .input-dark {
+            background: #ffffff !important;
+            border: 1px solid #ced4da !important;
+            color: #212529 !important;
+            border-radius: 4px !important;
+        }
+        .input-dark:focus {
+            border-color: var(--acento) !important;
+            box-shadow: 0 0 0 0.25rem rgba(240, 173, 78, 0.25) !important;
+        }
+        .input-dark::placeholder { color: #6c757d !important; opacity: 1; }
 
-        .btn-menu-lateral { background: transparent; border: none; color: var(--branco); font-size: 2rem; padding: 0; cursor: pointer; transition: color 0.2s; line-height: 1; }
-        .btn-menu-lateral:hover { color: var(--acento); }
-        .btn-admin-trigger { background: transparent; border: 1px solid rgba(200,168,75,0.4); color: var(--acento); font-size: 1.2rem; padding: 2px 10px; cursor: pointer; transition: all 0.2s; border-radius: 4px; }
-        .btn-admin-trigger:hover { background: rgba(200,168,75,0.1); border-color: var(--acento); color: var(--acento); }
-
-        /* =============================================
-           MENU PÚBLICO
-        ============================================= */
-        #menuPublico { background: #0c0c0c; border-right: 1px solid var(--acento); width: 300px !important; }
-        #menuPublico .offcanvas-header { border-bottom: 1px solid #1a1a1a; padding: 20px; }
-        .menu-pub-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px; font-size: 1.4rem; color: var(--acento); margin: 0; }
-        .menu-pub-link { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: var(--branco); text-decoration: none; display: block; padding: 12px 20px; border-bottom: 1px solid #151515; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
-        .menu-pub-link:hover { background: rgba(200,168,75,0.1); color: var(--acento); padding-left: 25px; }
-        .menu-pub-link i { margin-right: 10px; color: var(--acento); }
-        .menu-submenu { background: #080808; border-bottom: 1px solid #151515; }
-        .menu-submenu a { font-family: 'Barlow', sans-serif; font-size: 0.95rem; color: #aaa; text-decoration: none; display: block; padding: 10px 20px 10px 45px; transition: color 0.2s; cursor: pointer; }
-        .menu-submenu a:hover { color: var(--branco); }
-
-        /* =============================================
-           HERO
-        ============================================= */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #000; }
-        .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(0,31,77,0.8) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 20%, rgba(200,168,75,0.05) 0%, transparent 60%); z-index: 0; }
-        .hero-bg::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.02) 60px), repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.02) 60px); background-size: 60px 60px; }
-        .hero-inner { position: relative; z-index: 1; text-align: center; padding: 40px 20px; animation: heroFade 1.2s ease both; }
-        @keyframes heroFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .hero-eyebrow { font-family: 'Oswald', sans-serif; font-weight: 300; font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase; color: var(--acento); margin-bottom: 24px; opacity: 0; animation: heroFade 0.8s 0.3s ease both; }
-        .hero-escudo { width: 110px; margin: 0 auto 28px; filter: drop-shadow(0 0 30px rgba(200,168,75,0.3)); opacity: 0; animation: heroFade 0.8s 0.5s ease both; }
-        .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 10rem); line-height: 0.9; letter-spacing: 4px; color: var(--branco); text-shadow: 0 0 80px rgba(200,168,75,0.15); opacity: 0; animation: heroFade 0.8s 0.7s ease both; }
-        .hero-title span { color: var(--acento); }
-        .hero-sub { font-family: 'Oswald', sans-serif; font-weight: 300; font-size: 0.85rem; letter-spacing: 8px; text-transform: uppercase; color: #777; margin-top: 20px; opacity: 0; animation: heroFade 0.8s 0.9s ease both; }
-        .hero-line { width: 60px; height: 1px; background: var(--acento); margin: 20px auto; opacity: 0; animation: heroFade 0.8s 1.1s ease both; }
-
-        /* SEÇÕES */
-        .secao { padding: 80px 0; }
-        .secao-titulo { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: 3px; color: var(--branco); margin-bottom: 4px; }
-        .secao-titulo span { color: var(--acento); }
-        .secao-sub { font-family: 'Oswald', sans-serif; font-size: 0.75rem; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: #555; margin-bottom: 50px; }
-
-        /* CARDS MOMENTO */
-        .card-momento { background: #111; border: 1px solid #1e1e1e; cursor: pointer; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
-        .card-momento:hover { border-color: rgba(200,168,75,0.4); transform: translateY(-4px); }
-        .card-thumb { height: 220px; overflow: hidden; position: relative; background: #0a0a0a; }
-        .card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
-        .card-momento:hover .card-thumb img { transform: scale(1.06); }
-        .thumb-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7) 100%); }
-        .card-info { padding: 18px 20px 16px; }
-        .card-data { font-size: 0.7rem; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-bottom: 8px; font-family: 'Oswald', sans-serif; }
-        .card-titulo { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; color: var(--branco); }
-
-        /* CRONOGRAMA */
-        .secao-cronograma { background-color: #080808; border-top: 1px solid #1a1a1a; }
-        .evento-card { background: #111; border-left: 3px solid var(--acento); padding: 20px; margin-bottom: 15px; display: flex; align-items: center; transition: transform 0.3s; }
-        .evento-card:hover { transform: translateX(8px); background: #151515; }
-        .evento-data { width: 110px; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--acento); text-align: center; border-right: 1px solid #222; margin-right: 20px; padding-right: 20px;}
-
-        /* LOJA */
-        .card-produto { background: #111; border: 1px solid #1e1e1e; overflow: hidden; transition: transform 0.3s; text-align: center; display: flex; flex-direction: column; height: 100%; position: relative;}
-        .produto-img { height: 200px; width: 100%; object-fit: cover; background: #0a0a0a; border-bottom: 1px solid #1e1e1e; }
-        .produto-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .produto-titulo { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: var(--branco); text-transform: uppercase; }
-        .produto-preco { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acento); margin-bottom: 15px; }
-        .btn-comprar { background: #25D366; color: #fff; border: none; font-family: 'Oswald', font-weight: 700; padding: 10px; text-decoration: none; display: block; }
-        .badge-categoria { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: var(--acento); border: 1px solid var(--acento); font-size: 0.7rem; padding: 3px 8px; }
+        /* MEMORIAL */
+        .homenagens-box {
+            background: #000;
+            border: 1px solid #1a1a1a;
+            padding: 40px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .homenagens-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: var(--acento);
+        }
 
         /* ADMIN */
-        #appInterno { background: #0c0c0c; border-left: 1px solid #1e1e1e; width: 340px !important; }
-        .admin-header { background: #080808; border-bottom: 1px solid rgba(200,168,75,0.2); padding: 20px; }
-        .input-dark { background: #111; border: 1px solid #2a2a2a; color: var(--branco); border-radius: 0; }
-        .input-dark:focus { background: #111; border-color: var(--acento); color: #fff; box-shadow: none; }
-        .btn-ouro { background: var(--acento); color: #000; border: none; font-family: 'Oswald', font-weight: 700; padding: 10px 20px; text-transform: uppercase; }
-        .nav-tabs-dark .nav-link { color: #555; font-family: 'Oswald'; font-size: 0.75rem; border: none; }
-        .nav-tabs-dark .nav-link.active { color: var(--acento); background: transparent; border-bottom: 2px solid var(--acento); }
-        .member-item-dark { background: #111; border-left: 3px solid var(--acento); padding: 12px; margin-bottom: 10px; border: 1px solid #1a1a1a; }
-        .select-dark { background-color: #111; color: var(--branco); border: 1px solid #2a2a2a; border-radius: 0; }
+        #appInterno {
+            background: #080808;
+            border-left: 2px solid var(--acento);
+            width: 380px !important;
+        }
+        .btn-ouro {
+            background: var(--acento);
+            color: #000;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .btn-ouro:hover {
+            background: #d9963d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(240,173,78,0.4);
+            color: #000 !important;
+        }
+        .btn-outline-warning {
+            border-color: var(--acento);
+            color: var(--acento);
+        }
+        .btn-outline-warning:hover {
+            background: var(--acento);
+            color: #000 !important;
+        }
+        .btn-outline-light:hover {
+            background: #fff;
+            color: #000 !important;
+            border-color: #fff;
+        }
+        .btn-outline-info:hover {
+            background: #00a8ff;
+            border-color: #00a8ff;
+            color: #fff !important;
+        }
 
-        /* RODAPÉ */
-        .rodape { background: #000; border-top: 1px solid rgba(200,168,75,0.15); padding: 40px 0 24px; color: #3a3a3a; font-size: 0.8rem; }
+        /* FEED & PRODUTOS */
+        .feed-item {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .feed-item:hover {
+            transform: scale(1.02);
+            border-color: var(--acento);
+        }
+        .feed-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .produto-item {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .produto-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--acento);
+        }
+        .produto-item i { font-size: 3rem; color: var(--acento); }
+        .saldo-valor {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--acento);
+        }
+
+        /* CARD GOOGLE STYLE */
+        .card-google-style {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            border: 1px solid #2a2a4a;
+        }
+        .time-icon {
+            font-size: 3rem;
+            transition: transform 0.3s, filter 0.3s;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+        .time-icon:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 20px rgba(240,173,78,0.6));
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes pulseGold {
+            from { box-shadow: inset 0 0 20px rgba(240,173,78,0.3); }
+            to { box-shadow: inset 0 0 60px rgba(240,173,78,0.8); }
+        }
+        @keyframes popIn {
+            from { transform: translate(-50%,-50%) scale(0.5); opacity:0; }
+            to { transform: translate(-50%,-50%) scale(1); opacity:1; }
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes golFloat {
+            0% { opacity: 1; transform: translate(-50%, 0) scale(0.5); }
+            50% { transform: translate(-50%, -30px) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -80px) scale(1.5); }
+        }
+        @keyframes torcidaPulse {
+            0%, 100% { background-position: center bottom; }
+            50% { background-position: center 30%; }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(240,173,78,0.3); }
+            to { box-shadow: 0 0 30px rgba(240,173,78,0.8); }
+        }
+
+        /* MODO TORCIDA */
+        body.modo-torcida {
+            background: radial-gradient(ellipse at bottom, #1a2a4a 0%, #050505 70%) !important;
+            animation: torcidaPulse 4s ease-in-out infinite;
+        }
+        body.modo-torcida .section-title {
+            text-shadow: 0 0 15px rgba(240,173,78,0.6);
+        }
+        body.modo-torcida .btn-ouro {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        /* FRASE FLUTUANTE */
+        #fraseTorcida {
+            max-width: 280px;
+            font-size: 0.85rem;
+            animation: slideIn 0.5s ease;
+            cursor: pointer;
+        }
+        #fraseTorcida:hover {
+            transform: scale(1.05);
+            border-color: var(--acento) !important;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* LOGO HOVER */
+        #logoBuldogs:hover {
+            transform: scale(1.1) !important;
+            filter: drop-shadow(0 0 10px rgba(240,173,78,0.6));
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .hero-premium { min-height: auto; padding: 40px 0 60px 0; }
+            .section-title { font-size: 2rem; }
+            .time-icon { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-oficial sticky-top" id="mainNav">
+    <!-- Navbar principal -->
+    <nav class="navbar navbar-expand-lg navbar-oficial">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-3">
-                <button class="btn-menu-lateral" data-bs-toggle="offcanvas" data-bs-target="#menuPublico"><i class="bi bi-list"></i></button>
-                <a class="navbar-brand" href="#" onclick="navegarPara('home')">
-                    <img src="https://i.postimg.cc/W4L57vYy/Clube-do-remo-atual.png" alt="Escudo Remo" class="brand-escudo">
-                    <span>BULDOGS</span>
+                <button class="btn btn-link text-white fs-2 p-0 border-0 bg-transparent" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+                    <i class="bi bi-list"></i>
+                </button>
+                <a class="navbar-brand text-white font-bebas fs-3" href="#" onclick="navegarPara('home')">
+                    BULDOGS <span style="color:var(--acento)">JURUNAS</span>
                 </a>
             </div>
-            <div class="collapse navbar-collapse justify-content-center d-none d-lg-flex">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link nav-link-pub" onclick="navegarPara('momentos')">Momentos</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-pub" onclick="navegarPara('cronograma')">Agenda</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-pub" onclick="navegarPara('loja')">Loja</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-pub" onclick="navegarPara('historia')">História</a></li>
-                </ul>
+            <div class="d-none d-lg-flex align-items-center">
+                <button class="btn btn-outline-warning btn-sm me-2" onclick="alternarModoTorcida()" title="Modo Jogo">
+                    <i class="bi bi-moon-stars-fill"></i>
+                </button>
+                <button class="btn btn-outline-warning btn-sm" data-bs-toggle="offcanvas" data-bs-target="#appInterno" onclick="verificarLogin()">
+                    <i class="bi bi-shield-lock"></i> GESTÃO
+                </button>
             </div>
-            <button class="btn-admin-trigger" data-bs-toggle="offcanvas" data-bs-target="#appInterno" onclick="verificarLogin()"><i class="bi bi-three-dots-vertical"></i></button>
         </div>
     </nav>
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="menuPublico">
-        <div class="offcanvas-header"><h5 class="menu-pub-title">MENU BULDOGS</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button></div>
+    <!-- Menu lateral (offcanvas) -->
+    <div class="offcanvas offcanvas-start sidebar-buldogs" id="sidebarMenu" tabindex="-1">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="text-white m-0 font-bebas">BULDOGS APP 2026</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
         <div class="offcanvas-body p-0">
-            <div class="menu-submenu">
-                <a onclick="navegarPara('loja', 'Camisas')" data-bs-dismiss="offcanvas">Camisas</a>
-                <a onclick="navegarPara('loja', 'Todos')" data-bs-dismiss="offcanvas">Ver Loja</a>
+            <a class="nav-link-app" onclick="navegarPara('home')" data-bs-dismiss="offcanvas">
+                <i class="bi bi-house-door"></i> Início / História
+            </a>
+            <a class="nav-link-app" onclick="navegarPara('momentos')" data-bs-dismiss="offcanvas">
+                <i class="bi bi-camera-reels"></i> Últimos Momentos
+            </a>
+            <a class="nav-link-app" onclick="navegarPara('cadastro')" data-bs-dismiss="offcanvas">
+                <i class="bi bi-person-plus-fill"></i> Cadastro de Sócios
+            </a>
+            <a class="nav-link-app" onclick="navegarPara('cronograma')" data-bs-dismiss="offcanvas">
+                <i class="bi bi-calendar3"></i> Cronograma Anual
+            </a>
+            <a class="nav-link-app" onclick="navegarPara('loja')" data-bs-dismiss="offcanvas">
+                <i class="bi bi-cart4"></i> Loja (Materiais)
+            </a>
+            <a class="nav-link-app" onclick="navegarPara('homenagens')" data-bs-dismiss="offcanvas">
+                <i class="bi bi-heart-pulse"></i> Feijão & Finados
+            </a>
+            <div class="mt-5 p-4 text-center">
+                <hr class="text-secondary">
+                <small class="text-muted d-block mb-3">PATROCINADORES</small>
+                <img src="https://via.placeholder.com/150x50/111/f0ad4e?text=LOGO+PARCEIRO" class="img-fluid opacity-50 mb-2">
+                <img src="https://via.placeholder.com/150x50/111/f0ad4e?text=APOIO" class="img-fluid opacity-50">
             </div>
-            <a onclick="navegarPara('momentos')" class="menu-pub-link" data-bs-dismiss="offcanvas"><i class="bi bi-image"></i> Últimos Momentos</a>
-            <a onclick="navegarPara('cronograma')" class="menu-pub-link" data-bs-dismiss="offcanvas"><i class="bi bi-calendar-event"></i> Agenda</a>
         </div>
     </div>
 
-    <section class="hero" id="home">
-        <div class="hero-bg"></div>
-        <div class="hero-inner">
-            <p class="hero-eyebrow">Torcida Organizada · Fundada em 1985</p>
-            <img src="https://i.postimg.cc/Qd24hnw9/ei-1771515845249-removebg-preview.png" class="hero-escudo">
-            <h1 class="hero-title">BULDOGS<br><span>DO JURUNAS</span></h1>
+    <!-- HERO COM CARD GOOGLE (único card) -->
+    <section class="hero-premium" id="home">
+        <div class="container position-relative">
+            <img src="https://i.postimg.cc/Qd24hnw9/ei-1771515845249-removebg-preview.png" 
+                 style="width:140px; margin-bottom:30px; cursor:pointer; transition:transform 0.2s;" 
+                 alt="Buldogs Logo" id="logoBuldogs">
+            
+            <h1 style="font-family:'Bebas Neue'; font-size:clamp(4rem, 10vw, 7rem); line-height:0.8;">
+                BULDOGS<br><span style="color:var(--acento)">DO JURUNAS</span>
+            </h1>
+            <p class="mt-3 text-secondary" style="letter-spacing:6px; font-family:'Oswald';">
+                O MAIOR DO NORTE · DESDE 1985
+            </p>
+
+            <!-- CARD 2: ESTILO GOOGLE (SEM CONTADOR) - ÚNICO CARD -->
+            <div class="p-4 card-app card-google-style mx-auto" style="max-width:500px; border-radius:12px;">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="badge bg-warning text-dark px-3 py-2">⚽ SEMIFINAL</span>
+                    <small class="text-secondary">Parazão 2026</small>
+                </div>
+                
+                <div class="row align-items-center mb-3">
+                    <div class="col-4 text-center">
+                        <div class="p-2">
+                            <i class="bi bi-shield-fill time-icon" style="color:#fff;"></i>
+                            <h5 class="text-white mt-2 mb-0" id="timeCasaGoogle">Cametá</h5>
+                        </div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div class="py-3">
+                            <span class="text-secondary" style="font-size:1.5rem; font-weight:bold;">VS</span>
+                        </div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div class="p-2">
+                            <i class="bi bi-shield-fill time-icon" style="color:#00a8ff;"></i>
+                            <h5 class="text-white mt-2 mb-0" id="timeForaGoogle">Remo</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mb-3">
+                    <p class="text-warning mb-1" id="dataJogoGoogle">
+                        Amanhã às 17:00
+                    </p>
+                    <p class="text-secondary small mb-0" id="localJogoGoogle">
+                        Estádio do Cametá
+                    </p>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="https://www.google.com/search?q=cametá+sport+club+x+clube+do+remo" 
+                       target="_blank" 
+                       class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-search"></i> Ver informações do jogo
+                    </a>
+                    <a href="https://www.ingressorapido.com.br" 
+                       target="_blank" 
+                       class="btn btn-outline-warning btn-sm">
+                        <i class="bi bi-ticket-perforated"></i> Comprar ingressos
+                    </a>
+                    <a href="https://ge.globo.com" 
+                       target="_blank" 
+                       class="btn btn-outline-info btn-sm">
+                        <i class="bi bi-tv"></i> Onde assistir
+                    </a>
+                </div>
+                
+                <div class="mt-3 pt-3 border-top border-secondary">
+                    <small class="text-muted d-block text-center">
+                        <i class="bi bi-clock me-1"></i>
+                        Horário de Brasília
+                    </small>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section id="momentos" class="secao">
+    <!-- SEÇÃO ÚLTIMOS MOMENTOS -->
+    <section id="momentos" class="secao secao-inicial">
         <div class="container">
-            <h2 class="secao-titulo">Últimos <span>Momentos</span></h2>
+            <h2 class="section-title">Últimos <span>Momentos</span></h2>
             <div class="row g-3" id="feedContainer"></div>
         </div>
     </section>
 
-    <section id="cronograma" class="secao secao-cronograma secao-opcional">
+    <!-- SEÇÃO CADASTRO -->
+    <section id="cadastro" class="secao">
         <div class="container">
-            <h2 class="secao-titulo">Nosso <span>Cronograma</span></h2>
-            <div id="cronogramaContainer"></div>
+            <h2 class="section-title">Ficha de <span>Integrante</span></h2>
+            <div class="card card-app p-4">
+                <form id="formCadastroApp" class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted">Nome Completo</label>
+                        <input type="text" id="cadNome" class="form-control input-dark" required placeholder="Seu nome completo">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted">Nº de Sócio</label>
+                        <input type="number" id="cadNum" class="form-control input-dark" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted">Nascimento</label>
+                        <input type="date" id="cadNasc" class="form-control input-dark" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small text-muted">CPF</label>
+                        <input type="text" id="cadCpf" class="form-control input-dark" placeholder="000.000.000-00">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small text-muted">Telefone</label>
+                        <input type="tel" id="cadTel" class="form-control input-dark" placeholder="(91) 99999-9999" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small text-muted">E-mail</label>
+                        <input type="email" id="cadEmail" class="form-control input-dark" placeholder="seu@email.com">
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-ouro w-100">CADASTRAR INTEGRANTE</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
-    <section id="loja" class="secao secao-opcional">
+    <!-- SEÇÃO CRONOGRAMA -->
+    <section id="cronograma" class="secao" style="background:#080808;">
         <div class="container">
-            <h2 class="secao-titulo">Boutique <span>Buldogs</span></h2>
-            <p class="secao-sub" id="subtituloLoja">Materiais Oficiais</p>
-            <div class="row g-4 justify-content-center" id="lojaContainer"></div>
+            <h2 class="section-title">Cronograma <span>2026</span></h2>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover border-secondary">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Mês/Data</th>
+                            <th>Evento</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaCronograma"></tbody>
+                </table>
+            </div>
         </div>
     </section>
 
-    <section id="historia" class="secao historia-wrap">
+    <!-- SEÇÃO LOJA -->
+    <section id="loja" class="secao">
         <div class="container">
-            <h2 class="secao-titulo">Nossa <span>História</span></h2>
-            <div class="historia-texto">A força de um bairro, o amor por um clube. Desde 1985 representando o Jurunas.</div>
+            <h2 class="section-title">Loja <span>Buldogs</span></h2>
+            <div class="row g-4" id="lojaContainer"></div>
         </div>
     </section>
 
-    <footer class="rodape text-center"><div class="container">© 2026 · BULDOGS DO JURUNAS</div></footer>
+    <!-- SEÇÃO HOMENAGENS -->
+    <section id="homenagens" class="secao secao-inicial">
+        <div class="container">
+            <h2 class="section-title">Memorial <span>& Homenagens</span></h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="homenagens-box h-100">
+                        <h4 style="color:var(--acento); font-family:'Bebas Neue';">
+                            <i class="bi bi-star-fill me-2"></i>Tributo ao Feijão
+                        </h4>
+                        <p class="text-secondary mt-3 lh-lg">
+                            Espaço dedicado à memória e legado inestimável do nosso eterno irmão Feijão. 
+                            Sua liderança, coragem e paixão continuam guiando os passos desta torcida 
+                            em cada estádio do Brasil.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="homenagens-box h-100">
+                        <h4 class="text-white font-bebas">
+                            <i class="bi bi-clouds-fill me-2 text-info"></i>Finados
+                        </h4>
+                        <p class="text-secondary mt-3 lh-lg">
+                            Homenagem solene a todos os irmãos que partiram. Eles não estão mais fisicamente 
+                            presentes, mas cada grito de gol no Mangueirão ecoa a alma de quem construiu a nossa história.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="appInterno">
-        <div class="admin-header d-flex justify-content-between align-items-center">
-            <h5 style="font-family:'Bebas Neue'; color:var(--acento);">GESTÃO BULDOGS</h5>
+    <!-- FOOTER -->
+    <footer class="p-5 text-center border-top border-secondary text-muted small">
+        <p class="mb-1">BULDOGS DO JURUNAS © 2026</p>
+        <p class="mb-0">A FORÇA DO BAIRRO NO MANGUEIRÃO 🐾💛</p>
+    </footer>
+
+    <!-- FRASE DA TORCIDA (flutuante) -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index:1000;">
+        <div class="card card-app p-2" id="fraseTorcida" onclick="novaFrase()" title="Clique para nova frase">
+            <i class="bi bi-chat-quote-fill text-warning me-1"></i>
+            <span id="textoFrase">Carregando...</span>
+        </div>
+    </div>
+
+    <!-- PAINEL ADMIN (offcanvas direita) -->
+    <div class="offcanvas offcanvas-end" id="appInterno" tabindex="-1">
+        <div class="admin-header p-3 border-bottom border-secondary d-flex justify-content-between">
+            <h5 class="m-0 text-white font-bebas">SISTEMA GESTOR</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div id="loginArea" class="p-4">
-            <input type="password" id="senhaAcesso" class="form-control input-dark mb-3" placeholder="Senha (1234)">
-            <button class="btn btn-ouro w-100" onclick="tentarLogin()">Acessar</button>
+            <input type="password" id="passAdm" class="form-control input-dark mb-3" placeholder="Senha Administrativa">
+            <button class="btn btn-ouro w-100" onclick="tentarLogin()">Entrar</button>
+            <small class="text-muted d-block mt-2">Senha padrão: 1234</small>
         </div>
-        <div id="appArea" style="display:none;">
-            <ul class="nav nav-tabs nav-tabs-dark px-2 pt-2">
-                <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabLoja">Loja</button></li>
-                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSocios">Sócios</button></li>
+        <div id="appArea" style="display:none;" class="p-3">
+            <ul class="nav nav-tabs" style="border-bottom-color: #333;">
+                <li class="nav-item">
+                    <button class="nav-link active bg-transparent text-white border-0" data-bs-toggle="tab" data-bs-target="#admSocio">SÓCIOS</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link bg-transparent text-white border-0" data-bs-toggle="tab" data-bs-target="#admFin">FINANCEIRO</button>
+                </li>
             </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="tabLoja">
-                    <div class="p-3">
-                        <form id="formLojaAdmin" class="mb-4">
-                            <input type="hidden" id="editProdId" value="">
-                            <input type="text" id="nomeProduto" class="form-control input-dark mb-2" placeholder="Nome do Material" required>
-                            <select class="form-select select-dark mb-2" id="categoriaProduto" required>
-                                <option value="Camisas">Camisas</option>
-                                <option value="Calças">Calças</option>
-                                <option value="Chapéus">Chapéus</option>
-                                <option value="Bandeiras">Bandeiras</option>
-                                <option value="Outros">Outros</option>
-                            </select>
-                            <input type="text" id="precoProduto" class="form-control input-dark mb-2" placeholder="Preço (Ex: 75,00)" required>
-                            
-                            <div class="mb-2">
-                                <label class="small text-muted d-block mb-1">Como adicionar a foto?</label>
-                                <div class="btn-group w-100 mb-2">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="toggleImgSource('link')">Por Link</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="toggleImgSource('file')">Subir Foto</button>
-                                </div>
-                                <input type="url" id="imgProdutoLink" class="form-control input-dark mb-2" placeholder="URL da Imagem">
-                                <input type="file" id="imgProdutoFile" class="form-control input-dark mb-2" accept="image/*" style="display:none;">
-                            </div>
-
-                            <button type="submit" id="btnSalvarProd" class="btn btn-ouro w-100">Adicionar Material</button>
-                            <button type="button" id="btnCancelaEdit" class="btn btn-sm btn-link text-secondary w-100 mt-1" style="display:none;" onclick="cancelarEdicao()">Cancelar Edição</button>
-                        </form>
-                        <p class="small text-muted border-bottom pb-2">Itens em Estoque</p>
-                        <div id="listaLojaAdmin"></div>
-                    </div>
+            <div class="tab-content mt-3">
+                <div class="tab-pane fade show active" id="admSocio">
+                    <div id="listaAdminSocios"></div>
+                    <small class="text-muted d-block mt-2">Total: <span id="totalSocios">0</span> integrantes</small>
                 </div>
-                <div class="tab-pane fade" id="tabSocios"><div class="p-3" id="listaSociosContainer"></div></div>
+                <div class="tab-pane fade" id="admFin">
+                    <div class="text-center p-3 border border-secondary mb-3">
+                        <div class="saldo-valor" id="saldoCaixa">R$ 0,00</div>
+                        <small class="text-muted">Caixa da torcida</small>
+                    </div>
+                    <p class="small text-secondary text-center">Movimentações aparecerão aqui em breve.</p>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SCRIPT PRINCIPAL -->
     <script>
+        // ═══════════════════════════════════════════════════════
+        // ⚙️ CONFIGURAÇÃO DO PRÓXIMO JOGO - EDITAR AQUI!
+        // ═══════════════════════════════════════════════════════
+        const PROXIMO_JOGO = {
+            casa: 'Cametá',
+            fora: 'Remo',
+            data: '2026-03-15T17:00:00',
+            campeonato: 'Parazão 2026 - Semifinal',
+            local: 'Estádio do Cametá'
+        };
+
+        // ═══════════════════════════════════════════════════════
+        // 🔐 CONFIGURAÇÕES DO SISTEMA
+        // ═══════════════════════════════════════════════════════
         const SENHA_ADM = "1234";
-        const WHATSAPP_OFICIAL = "5591999999999"; 
-        let imgSourceMode = 'link'; 
+        const WHATSAPP_OFICIAL = "5591999999999";
 
-        // NAVEGAÇÃO
-        function navegarPara(id, filtro = 'Todos') {
-            const secoesOpcionais = ['cronograma', 'loja'];
-            if (id === 'home' || id === 'momentos' || id === 'historia') {
-                secoesOpcionais.forEach(s => document.getElementById(s).style.display = 'none');
-            } else if (secoesOpcionais.includes(id)) {
-                document.getElementById(id).style.display = 'block';
-                secoesOpcionais.forEach(s => { if(s !== id) document.getElementById(s).style.display = 'none'; });
-            }
-            if (id === 'loja') filtrarLoja(filtro);
-            window.scrollTo({ top: document.getElementById(id).offsetTop - 70, behavior: 'smooth' });
+        // ═══════════════════════════════════════════════════════
+        // 💾 BANCO DE DADOS (localStorage)
+        // ═══════════════════════════════════════════════════════
+        const getBD = (chave) => JSON.parse(localStorage.getItem(chave)) || [];
+        const saveBD = (chave, valor) => localStorage.setItem(chave, JSON.stringify(valor));
+
+        // ═══════════════════════════════════════════════════════
+        // 📦 DADOS INICIAIS
+        // ═══════════════════════════════════════════════════════
+        if (!localStorage.getItem('bd_socios_2026')) saveBD('bd_socios_2026', []);
+        if (!localStorage.getItem('bd_agenda')) {
+            saveBD('bd_agenda', [
+                { mes: 'Jan', nome: 'Confra de verão' },
+                { mes: 'Fev', nome: 'Ação no bairro' },
+                { mes: 'Mar', nome: 'Aniversário da torcida' },
+                { mes: 'Abr', nome: 'Páscoa solidária' },
+                { mes: 'Mensal', nome: 'Entrega de sopa' }
+            ]);
+        }
+        if (!localStorage.getItem('bd_loja')) {
+            saveBD('bd_loja', [
+                { nome: 'Pulseira Oficial', preco: '15,00' },
+                { nome: 'Camisa Retro', preco: '89,90' },
+                { nome: 'Boné Bulldogs', preco: '49,90' }
+            ]);
+        }
+        if (!localStorage.getItem('bd_feed')) {
+            saveBD('bd_feed', [
+                { imagem: 'https://via.placeholder.com/400x200/222/f0ad4e?text=Jogo+no+Mangueirao', legenda: 'Festa na arquibancada contra o Paysandu' },
+                { imagem: 'https://via.placeholder.com/400x200/222/f0ad4e?text=Acao+Solidaria', legenda: 'Distribuição de sopa no Jurunas' },
+                { imagem: 'https://via.placeholder.com/400x200/222/f0ad4e?text=Assembleia', legenda: 'Reunião de planejamento 2026' }
+            ]);
         }
 
-        // DATABASE
-        function getDBLoja() { return JSON.parse(localStorage.getItem('bd_loja_v2')) || []; }
-        function saveDBLoja(data) { localStorage.setItem('bd_loja_v2', JSON.stringify(data)); }
-
-        // TOGGLE FONTE IMAGEM
-        function toggleImgSource(mode) {
-            imgSourceMode = mode;
-            document.getElementById('imgProdutoLink').style.display = mode === 'link' ? 'block' : 'none';
-            document.getElementById('imgProdutoFile').style.display = mode === 'file' ? 'block' : 'none';
+        // ═══════════════════════════════════════════════════════
+        // 🧭 NAVEGAÇÃO
+        // ═══════════════════════════════════════════════════════
+        function navegarPara(id) {
+            const sections = ['momentos', 'cadastro', 'cronograma', 'loja', 'homenagens'];
+            const isHome = (id === 'home');
+            sections.forEach(s => {
+                const el = document.getElementById(s);
+                if (el) {
+                    if (isHome) {
+                        el.style.display = (s === 'momentos' || s === 'homenagens') ? 'block' : 'none';
+                    } else {
+                        el.style.display = (s === id) ? 'block' : 'none';
+                    }
+                }
+            });
+            if (id === 'cadastro') atualizarNumeroSocio();
+            if (isHome) window.scrollTo({ top: 0, behavior: 'smooth' });
+            else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // EDITAR PRODUTO
-        function prepararEdicao(id) {
-            const db = getDBLoja();
-            const p = db.find(prod => prod.id == id);
-            if(!p) return;
-
-            document.getElementById('editProdId').value = p.id;
-            document.getElementById('nomeProduto').value = p.nome;
-            document.getElementById('categoriaProduto').value = p.cat;
-            document.getElementById('precoProduto').value = p.preco;
-            document.getElementById('imgProdutoLink').value = p.img;
-            
-            document.getElementById('btnSalvarProd').innerText = "Salvar Alterações";
-            document.getElementById('btnCancelaEdit').style.display = 'block';
-            toggleImgSource('link');
+        // ═══════════════════════════════════════════════════════
+        // 🔢 NÚMERO DE SÓCIO
+        // ═══════════════════════════════════════════════════════
+        function atualizarNumeroSocio() {
+            const socios = getBD('bd_socios_2026');
+            document.getElementById('cadNum').value = 105 + socios.length;
         }
 
-        function cancelarEdicao() {
-            document.getElementById('formLojaAdmin').reset();
-            document.getElementById('editProdId').value = "";
-            document.getElementById('btnSalvarProd').innerText = "Adicionar Material";
-            document.getElementById('btnCancelaEdit').style.display = 'none';
+        // ═══════════════════════════════════════════════════════
+        // 🏅 BADGE DE SÓCIO
+        // ═══════════════════════════════════════════════════════
+        function gerarBadgeSocio(socio) {
+            const dataCadastro = new Date(socio.id);
+            const hoje = new Date();
+            const mesesComoSocio = (hoje.getFullYear() - dataCadastro.getFullYear()) * 12 + 
+                                  (hoje.getMonth() - dataCadastro.getMonth());
+            let badge = '';
+            if(mesesComoSocio >= 24) badge = '👑 LENDA';
+            else if(mesesComoSocio >= 12) badge = '⭐ VETERANO';
+            else if(mesesComoSocio >= 6) badge = '🔥 ATIVO';
+            else badge = '🐾 NOVO';
+            return `<span class="badge bg-warning text-dark ms-2">${badge}</span>`;
         }
 
-        // SALVAR PRODUTO (NOVO OU EDITAR)
-        document.getElementById('formLojaAdmin').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const db = getDBLoja();
-            const idEdit = document.getElementById('editProdId').value;
-            
-            let finalImg = document.getElementById('imgProdutoLink').value;
-
-            // Se for upload de arquivo
-            if(imgSourceMode === 'file' && document.getElementById('imgProdutoFile').files[0]) {
-                const file = document.getElementById('imgProdutoFile').files[0];
-                finalImg = await toBase64(file);
-            }
-
-            const dadosProd = {
-                id: idEdit ? parseInt(idEdit) : Date.now(),
-                nome: document.getElementById('nomeProduto').value,
-                cat: document.getElementById('categoriaProduto').value,
-                preco: document.getElementById('precoProduto').value,
-                img: finalImg
-            };
-
-            if(idEdit) {
-                const index = db.findIndex(p => p.id == idEdit);
-                db[index] = dadosProd;
-            } else {
-                db.push(dadosProd);
-            }
-
-            saveDBLoja(db);
-            cancelarEdicao();
-            renderizarLoja();
-            alert('Loja Atualizada!');
-        });
-
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-
-        // RENDERIZAÇÃO
-        function renderizarLoja() {
-            const db = getDBLoja();
-            const containerPub = document.getElementById('lojaContainer');
-            const containerAdm = document.getElementById('listaLojaAdmin');
-
-            containerPub.innerHTML = db.map(p => `
-                <div class="col-md-4 col-lg-3">
-                    <div class="card-produto">
-                        <span class="badge-categoria">${p.cat}</span>
-                        <img src="${p.img}" class="produto-img">
-                        <div class="produto-info">
-                            <h4 class="produto-titulo">${p.nome}</h4>
-                            <p class="produto-preco">R$ ${p.preco}</p>
-                            <a href="https://wa.me/${WHATSAPP_OFICIAL}" target="_blank" class="btn-comprar">Comprar</a>
+        // ═══════════════════════════════════════════════════════
+        // 🎨 RENDERIZAÇÃO
+        // ═══════════════════════════════════════════════════════
+        function renderTudo() {
+            const feed = getBD('bd_feed');
+            const feedContainer = document.getElementById('feedContainer');
+            if (feedContainer) {
+                feedContainer.innerHTML = feed.map(item => `
+                    <div class="col-md-4">
+                        <div class="feed-item">
+                            <img src="${item.imagem}" alt="Momento" onerror="this.src='https://via.placeholder.com/400x200/222/f0ad4e?text=Imagem'">
+                            <div class="p-3"><p class="mb-0 small">${item.legenda}</p></div>
                         </div>
                     </div>
-                </div>`).join('');
+                `).join('');
+            }
 
-            containerAdm.innerHTML = db.map(p => `
-                <div class="member-item-dark d-flex justify-content-between align-items-center">
-                    <div><strong>${p.nome}</strong><br><small>R$ ${p.preco}</small></div>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-warning" onclick="prepararEdicao(${p.id})"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="excluirProd(${p.id})"><i class="bi bi-trash"></i></button>
+            const agenda = getBD('bd_agenda');
+            const tabela = document.getElementById('tabelaCronograma');
+            if (tabela) {
+                tabela.innerHTML = agenda.map(item => `
+                    <tr>
+                        <td>${item.mes}</td>
+                        <td>${item.nome}</td>
+                        <td><span class="badge bg-success">Confirmado</span></td>
+                    </tr>
+                `).join('');
+            }
+
+            const produtos = getBD('bd_loja');
+            const lojaContainer = document.getElementById('lojaContainer');
+            if (lojaContainer) {
+                lojaContainer.innerHTML = produtos.map(prod => `
+                    <div class="col-md-4">
+                        <div class="produto-item">
+                            <i class="bi bi-cup-hot-fill"></i>
+                            <h5 class="mt-2">${prod.nome}</h5>
+                            <p class="text-warning mb-2">R$ ${prod.preco}</p>
+                            <button class="btn btn-sm btn-outline-warning w-100" onclick="comprarProduto('${prod.nome}')">
+                                <i class="bi bi-whatsapp"></i> Comprar
+                            </button>
+                        </div>
                     </div>
-                </div>`).join('');
+                `).join('');
+            }
+
+            const socios = getBD('bd_socios_2026');
+            const listaAdmin = document.getElementById('listaAdminSocios');
+            if (listaAdmin) {
+                if (socios.length === 0) {
+                    listaAdmin.innerHTML = '<p class="text-muted small text-center py-3">Nenhum sócio cadastrado ainda.</p>';
+                } else {
+                    listaAdmin.innerHTML = socios.map(s => `
+                        <div class="p-2 border-bottom border-secondary d-flex justify-content-between align-items-center">
+                            <small><strong>${s.num}</strong> - ${s.nome} ${gerarBadgeSocio(s)}</small>
+                            <button class="btn btn-sm btn-outline-danger" onclick="excluirSocio(${s.id})" title="Excluir">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    `).join('');
+                }
+                document.getElementById('totalSocios').textContent = socios.length;
+            }
+
+            const saldo = socios.length * 15;
+            const saldoEl = document.getElementById('saldoCaixa');
+            if (saldoEl) saldoEl.innerText = `R$ ${saldo.toFixed(2)}`;
         }
 
-        function excluirProd(id) { if(confirm('Apagar item?')) { saveDBLoja(getDBLoja().filter(p=>p.id!=id)); renderizarLoja(); } }
+        // ═══════════════════════════════════════════════════════
+        // 📝 CADASTRO
+        // ═══════════════════════════════════════════════════════
+        document.getElementById('formCadastroApp')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const novo = {
+                id: Date.now(),
+                nome: document.getElementById('cadNome').value,
+                num: document.getElementById('cadNum').value,
+                nasc: document.getElementById('cadNasc').value,
+                cpf: document.getElementById('cadCpf').value,
+                tel: document.getElementById('cadTel').value,
+                email: document.getElementById('cadEmail').value
+            };
+            const socios = getBD('bd_socios_2026');
+            socios.push(novo);
+            saveBD('bd_socios_2026', socios);
 
-        function filtrarLoja(cat) { renderizarLoja(); } // Simplificado para este exemplo
+            const msg = encodeURIComponent(
+                `*🐾 NOVA FICHA DE INTEGRANTE*\n\n` +
+                `*Nº Sócio:* ${novo.num}\n` +
+                `*Nome:* ${novo.nome}\n` +
+                `*CPF:* ${novo.cpf}\n` +
+                `*Nascimento:* ${novo.nasc}\n` +
+                `*WhatsApp:* ${novo.tel}\n` +
+                `*Email:* ${novo.email}\n\n` +
+                `_Solicito aprovação da diretoria._`
+            );
+            window.open(`https://wa.me/${WHATSAPP_OFICIAL}?text=${msg}`, '_blank');
+            this.reset();
+            renderTudo();
+            alert('✅ Sócio cadastrado com sucesso!\n\nA ficha foi enviada para aprovação via WhatsApp.');
+            navegarPara('home');
+        });
 
-        // LOGIN
-        function verificarLogin() { 
-6y            document.getElementById('loginArea').style.display = logado ? 'none' : 'block';
-            document.getElementById('appArea').style.display = logado ? 'block' : 'none';
-        }
-        function tentarLogin() {
-            if(document.getElementById('senhaAcesso').value === SENHA_ADM) {
-                sessionStorage.setItem('logado', 'true'); verificarLogin(); renderizarLoja();
+        // ═══════════════════════════════════════════════════════
+        // 🗑️ EXCLUIR SÓCIO
+        // ═══════════════════════════════════════════════════════
+        function excluirSocio(id) {
+            if (confirm('⚠️ Tem certeza que deseja remover este integrante?')) {
+                const socios = getBD('bd_socios_2026').filter(s => s.id !== id);
+                saveBD('bd_socios_2026', socios);
+                renderTudo();
+                alert('✅ Integrante removido com sucesso.');
             }
         }
 
-        window.onload = renderizarLoja;
+        // ═══════════════════════════════════════════════════════
+        // 🛒 COMPRAR PRODUTO
+        // ═══════════════════════════════════════════════════════
+        function comprarProduto(nome) {
+            const msg = encodeURIComponent(`Olá, Buldogs! 🐾\n\nTenho interesse no produto:\n🛍️ *${nome}*\n\nPodemos finalizar o pedido?`);
+            window.open(`https://wa.me/${WHATSAPP_OFICIAL}?text=${msg}`, '_blank');
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 🔐 ADMIN LOGIN
+        // ═══════════════════════════════════════════════════════
+        function verificarLogin() {
+            const logado = sessionStorage.getItem('isAdm') === 'true';
+            const loginArea = document.getElementById('loginArea');
+            const appArea = document.getElementById('appArea');
+            if (loginArea && appArea) {
+                loginArea.style.display = logado ? 'none' : 'block';
+                appArea.style.display = logado ? 'block' : 'none';
+            }
+            if (logado) renderTudo();
+        }
+        function tentarLogin() {
+            const senha = document.getElementById('passAdm')?.value;
+            if (senha === SENHA_ADM) {
+                sessionStorage.setItem('isAdm', 'true');
+                verificarLogin();
+            } else {
+                alert('❌ Senha incorreta!\n\nDica: A senha padrão é 1234');
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 🎯 ATUALIZA CARD GOOGLE (CARD 2)
+        // ═══════════════════════════════════════════════════════
+        function atualizarCardGoogle() {
+            const jogo = PROXIMO_JOGO;
+            const dataObj = new Date(jogo.data);
+            const agora = new Date();
+            const amanha = new Date(agora);
+            amanha.setDate(amanha.getDate() + 1);
+            
+            let dataTexto = '';
+            if (dataObj.toDateString() === agora.toDateString()) {
+                dataTexto = 'Hoje';
+            } else if (dataObj.toDateString() === amanha.toDateString()) {
+                dataTexto = 'Amanhã';
+            } else {
+                dataTexto = dataObj.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'});
+            }
+            const hora = dataObj.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+            
+            const timeCasa = document.getElementById('timeCasaGoogle');
+            const timeFora = document.getElementById('timeForaGoogle');
+            const dataEl = document.getElementById('dataJogoGoogle');
+            const localEl = document.getElementById('localJogoGoogle');
+            
+            if (timeCasa) timeCasa.textContent = jogo.casa;
+            if (timeFora) timeFora.textContent = jogo.fora;
+            if (dataEl) dataEl.textContent = `${dataTexto} às ${hora}`;
+            if (localEl) localEl.textContent = jogo.local;
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 🌙 MODO TORCIDA
+        // ═══════════════════════════════════════════════════════
+        function alternarModoTorcida() {
+            const body = document.body;
+            const isAtivo = body.classList.toggle('modo-torcida');
+            if (isAtivo) {
+                alert('🔊 MODO TORCIDA ATIVADO!\n\nBoa vibração para o jogo! 🐾💛⚽');
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 💬 FRASES DA TORCIDA
+        // ═══════════════════════════════════════════════════════
+        const frasesBuldogs = [
+            "No Jurunas a gente não torce, a gente VIVE! 🐾",
+            "Buldog não late, Buldog MORDE! 💛",
+            "Do Mangueirão pro Brasil, a força é nossa! 🔥",
+            "Feijão vive em cada grito de GOL! ⚽",
+            "1985-2026: 41 anos de pura paixão! 🏆",
+            "Quem não pula é traíra! BULDOGS! 🗣️",
+            "Jurunas presente! A torcida não abandona! 💪"
+        ];
+        function novaFrase() {
+            const textoFrase = document.getElementById('textoFrase');
+            if (textoFrase) {
+                const frase = frasesBuldogs[Math.floor(Math.random() * frasesBuldogs.length)];
+                textoFrase.textContent = frase;
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 🎮 EASTER EGG: KONAMI CODE
+        // ═══════════════════════════════════════════════════════
+        const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+        let konamiIndex = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konami[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konami.length) {
+                    ativarModoLenda();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function ativarModoLenda() {
+            document.body.style.animation = 'pulseGold 0.5s infinite alternate';
+            for (let i = 0; i < 50; i++) criarConfete();
+            const msg = document.createElement('div');
+            msg.innerHTML = `
+                <div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+                            background:linear-gradient(135deg,#000a1a,#f0ad4e);
+                            padding:30px;border-radius:20px;z-index:9999;
+                            text-align:center;box-shadow:0 0 50px rgba(240,173,78,0.8);
+                            border:3px solid #f0ad4e;animation:popIn 0.3s ease;
+                            max-width:90%;width:400px;">
+                    <h2 style="font-family:'Bebas Neue';font-size:3rem;margin:0;color:#000;">🏆 MODO LENDA! 🏆</h2>
+                    <p style="color:#fff;margin:15px 0;font-size:1.1rem;">Você é um Buldog de verdade!</p>
+                    <p style="color:rgba(255,255,255,0.8);font-size:0.9rem;margin-bottom:20px;">
+                        ↑↑↓↓←→←→🅱️🅰️<br><small>Segredo desbloqueado!</small>
+                    </p>
+                    <button class="btn btn-ouro" onclick="this.closest('div').parentElement.remove()">FECHAR</button>
+                </div>`;
+            document.body.appendChild(msg);
+            setTimeout(() => {
+                document.body.style.animation = '';
+                if (msg.parentElement) msg.remove();
+            }, 5000);
+        }
+
+        function criarConfete() {
+            const c = document.createElement('div');
+            const cores = ['#f0ad4e','#fff','#00a8ff','#ff6b6b','#4ecdc4'];
+            c.style.cssText = `
+                position:fixed;width:10px;height:10px;
+                background:${cores[Math.floor(Math.random()*cores.length)]};
+                left:${Math.random()*100}vw;top:-10px;
+                animation:fall ${2+Math.random()*3}s linear forwards;
+                border-radius:${Math.random()>'0.5'?'50%':'2px'};
+                z-index:9998;pointer-events:none;
+                box-shadow:0 0 5px rgba(0,0,0,0.3);`;
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 5000);
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // ⚽ EFEITO "GOL!" NO LOGO
+        // ═══════════════════════════════════════════════════════
+        function setupLogoEffect() {
+            const logo = document.getElementById('logoBuldogs');
+            if (!logo) return;
+            logo.addEventListener('click', () => {
+                logo.style.transform = 'scale(1.3) rotate(10deg)';
+                setTimeout(() => logo.style.transform = 'scale(1) rotate(0)', 200);
+                const gol = document.createElement('div');
+                gol.textContent = '⚽ GOL!';
+                gol.style.cssText = `
+                    position:fixed;top:20%;left:50%;transform:translateX(-50%);
+                    font-family:'Bebas Neue';font-size:4rem;color:#f0ad4e;
+                    text-shadow:0 0 20px rgba(240,173,78,0.8), 0 0 40px rgba(240,173,78,0.5);
+                    animation: golFloat 1.5s ease-out forwards; z-index:9999;
+                    pointer-events:none;white-space:nowrap;`;
+                document.body.appendChild(gol);
+                setTimeout(() => gol.remove(), 1500);
+            });
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 🚀 INICIALIZAÇÃO
+        // ═══════════════════════════════════════════════════════
+        window.addEventListener('DOMContentLoaded', function() {
+            renderTudo();
+            navegarPara('home');
+            atualizarCardGoogle(); // atualiza apenas o card Google
+            setupLogoEffect();
+            novaFrase();
+            setInterval(novaFrase, 15000);
+            verificarLogin();
+            console.log('🐾 Buldogs App 2026 carregado com sucesso!');
+            console.log('💛 Dica: Digite ↑↑↓↓←→←→🅱️🅰️ para um easter egg!');
+        });
     </script>
 </body>
-</html>
+                    </html>
